@@ -1,13 +1,21 @@
 # -*- coding: utf-8 -*-
 
-name = input("type here any name: ").strip()
-
-# prints each letter of the first name until it's fully printed
-print("first name: ", end='')
-for first_lyrics in range(0, name.find(' ')):
-    print(name[first_lyrics], end="")
-
-#separates the two names and, then writes the last name
-print("\nlast name: ", end="")
-for last_lyrics in range(name.rfind(' ') + 1, len(name)):
-    print(name[last_lyrics], end="")
+group = list()
+biggest = 0
+lowest = 0
+feedback = float(input("give me any number: "))
+biggest = feedback
+lowest = feedback
+for counter in range(0, 2):
+    group.append(feedback)
+    feedback = float(input("give me any number: "))
+    if feedback > biggest:
+        biggest = feedback
+    elif feedback < lowest:
+        lowest = feedback
+group.append(feedback)
+print("""biggest {}
+lowest {}
+numbers given: """.format(biggest, lowest), end="")
+for numbers in group:
+    print(numbers, end=" ")
