@@ -43,8 +43,45 @@ def factorial(*num):
     return final_result
 
 
+def grades(*grade, average_situation=False):
+    """
+    this function analyses any number of grades and it also returns: 
+        the total of grades;
+        the biggest grade;
+        the lowest grade;
+        the medium of all grades;
+        if  'average_situation' == True, it returns the situation
+    """
+    grade_list = list()
+    for elements in grade:
+        grade_list.append(elements)
+    print(grade_list)
+    big = grade_list[0]
+    low = grade_list[0]  
+    total_grades = 0  
+    for current_grade in grade_list:
+        if current_grade > big:
+            big = current_grade
+        if current_grade < low:
+            low = current_grade
+        total_grades += current_grade
+    medium = total_grades / len(grade_list)
+    result = {'total': len(grade_list), 'biggest': big, 'lowest': low, "medium": medium}
+    if average_situation:
+        if medium < 7:
+            result['situation'] = "below average"
+        elif medium == 7:
+            result['situation'] = "average"
+        else:
+            result['situation'] = "above average"
+    return result
+
+
 print(area(base=2, height=5))
 decoration('coding')
 print(biggest(10, 2,3 , 5, 6, 11))
 x = factorial(5, 3, 2, 4, 6)
 print(x)
+y = grades(1, 2, 3, 22, average_situation=True)
+print(y)
+help(grades)
