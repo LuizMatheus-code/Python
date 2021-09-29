@@ -1,4 +1,13 @@
-movies = ['ar', 'ghost', "g"]
+class Data:
+    def __init__(self, dia, mes, ano):
+        self.dia = dia
+        self.mes = mes
+        self.ano = ano
 
-square2 = [title for title in movies if title.startswith('g')]
-print(square2)
+
+    def __str__(self):
+        return f'{self.dia}/{self.mes}/{self.ano}'
+
+
+d1 = Data(1, 12, 2019)
+print(d1)
