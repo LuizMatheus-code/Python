@@ -1,41 +1,49 @@
-class Carro:
-    def __init__(self, velocidade):
-        self.velocidade = velocidade
+from datetime import datetime
+
+class Project:
+    def __init__(self, name):
+        self.name = name
+        self.task = []
+
+
+    def add(self, description):
+        self.Task.append(Task(description))
+
+
+    def missing(self):
+        return [Task for Task in self.Task if not Task.conclusion]
     
 
+    def search(self, description):
+        return [Task for Task in self.task
+        if Task.description == description][0]
+
     def __str__(self):
-        return self.velocidade
+        return f'{self.name} ({len(self.missing())}) missing tasks'
+
+class Task:
+    def __init__(self, description):
+        self.description = description
+        self.done = False
+        self.creation = datetime.now()
 
 
-    def acelerar(self, quantidade):
-        if self.velocidade >= 180:
-            return None
-        else:
-            if quantidade + self.velocidade > 180:
-                excedente = 180 - (quantidade + self.velocidade) 
-                ideal = quantidade + excedente
-                self.velocidade += ideal
-                return self.velocidade
-            else:
-                self.velocidade += quantidade
-                return self.velocidade
+    def conclusion(self):
+        self.done = True
 
 
-    def frear(self, quantidade):
-        if self.velocidade <= 0:
-            return None
-        else:
-            if self.velocidade - quantidade < 0:
-                    self.velocidade = 0
-                    return self.velocidade
-            else:
-                self.velocidade -= quantidade
-                return self.velocidade
+    def __str__(self):
+        return self.description + (' concluded' if self.done else '')
 
 
-fusca = Carro(1)
-print(fusca.velocidade)
-fusca.acelerar(178)
-print(fusca.velocidade)
-fusca.frear(1000)
-print(fusca.velocidade)
+def main():
+    house = Project('house')
+    house.add('dishes')
+    house.add('clean the house')
+    print(house)
+
+    house.search('dishes')
+
+
+if __name__ == '__main__':
+    main()
