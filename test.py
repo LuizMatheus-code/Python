@@ -1,13 +1,17 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class Project:
     def __init__(self, name):
         self.name = name
         self.task_list = []
-    
 
-    def add(self, description):
+
+    def __iter__(self):
+        return self.task_list.__iter__()
+
+
+    def add(self, description, end=None):
         self.task_list.append(Task(description))
 
 
@@ -25,10 +29,11 @@ class Project:
 
 
 class Task:
-    def __init__(self, description):
+    def __init__(self, description, end=None):
         self.description = description
         self.done = False
         self.creation = datetime.now()
+        self.end = end
 
 
     def getting_done(self):
@@ -36,7 +41,16 @@ class Task:
     
 
     def __str__(self):
-        return self.description + (' (Done)' if self.done else '')
+        status = []
+        if self.done:
+            status.append('(Done)')
+        elif self.end:
+            if datetime.now() > self.done:
+                status.append('(Late)')
+            else:
+                count_days = (self.end - datetime.now()).days
+                status.append(f"You're late by {count_days} days")
+        return f'{self.description}' + ' '.join(status)
 
 
 def main():
@@ -46,7 +60,7 @@ def main():
     print(house)
 
     house.search('Dishes').getting_done()
-    for tar in house.task_list:
+    for tar in house:
         print(f'- {tar}')
     print(house, '\n')
 
@@ -57,7 +71,7 @@ def main():
 
     thing_1_search = merchandise.search('thing 1')
     thing_1_search.getting_done()
-    for y in merchandise.task_list:
+    for y in merchandise:
         print(f'- {y}')
     print(merchandise)
 
