@@ -45,7 +45,7 @@ class Task:
         if self.done:
             status.append('(Done)')
         elif self.end:
-            if datetime.now() > self.done:
+            if datetime.now() > self.end:
                 status.append('(Late)')
             else:
                 count_days = (self.end - datetime.now()).days
@@ -53,10 +53,23 @@ class Task:
         return f'{self.description}' + ' '.join(status)
 
 
+class RecurrentTask(Task):
+    def __init__(self, description, end, days=7):
+        super().__init__(description, end)
+        self.days = days
+
+    def getting_done(self):
+        super().getting_done()
+        new_end = datetime.now() + timedelta(days=self.days)
+        return RecurrentTask(self.description, new_end, self.days)
+
+
 def main():
     house = Project('House tasks')
     house.add('Laundry')
     house.add('Dishes')
+    house.task_list.append(RecurrentTask('clean the house', datetime.now()))
+    house.task_list.append(house.search('clean the house').getting_done())
     print(house)
 
     house.search('Dishes').getting_done()
