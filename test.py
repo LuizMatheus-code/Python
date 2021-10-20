@@ -11,8 +11,19 @@ class Project:
         return self.task_list.__iter__()
 
 
-    def add(self, description, end=None):
-        self.task_list.append(Task(description))
+    def add_task(self, task, **kwargs):
+        self.task_list.append(task)
+
+
+    def add_new_task(self, description, **kwargs):
+        self.task_list.append(Task(description, kwargs.get('end', None)))
+
+
+    def add(self, task, end=None, **kwargs):
+        function = self.add_task if isinstance(task, Task) \
+            else self.add_new_task
+        kwargs['end'] = end
+        function(task, **kwargs)
 
 
     def due(self):
@@ -51,6 +62,14 @@ class Task:
                 count_days = (self.end - datetime.now()).days
                 status.append(f"You're late by {count_days} days")
         return f'{self.description}' + ' '.join(status)
+    
+
+    def test():
+        pass
+
+
+    def test(a, b, c):
+        pass
 
 
 class RecurrentTask(Task):
@@ -68,8 +87,8 @@ def main():
     house = Project('House tasks')
     house.add('Laundry')
     house.add('Dishes')
-    house.task_list.append(RecurrentTask('clean the house', datetime.now()))
-    house.task_list.append(house.search('clean the house').getting_done())
+    house.add(RecurrentTask('clean the house', datetime.now()))
+    house.add(house.search('clean the house').getting_done())
     print(house)
 
     house.search('Dishes').getting_done()
