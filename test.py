@@ -10,6 +10,13 @@ class Project:
     def __iter__(self):
         return self.task_list.__iter__()
 
+    
+
+    def __iadd__(self, task):
+        task.owner = self
+        self.add_task(task)
+        return self
+
 
     def add_task(self, task, **kwargs):
         self.task_list.append(task)
@@ -76,19 +83,23 @@ class RecurrentTask(Task):
     def __init__(self, description, end, days=7):
         super().__init__(description, end)
         self.days = days
+        self.owner = None
 
     def getting_done(self):
         super().getting_done()
         new_end = datetime.now() + timedelta(days=self.days)
-        return RecurrentTask(self.description, new_end, self.days)
+        new_task = RecurrentTask(self.description, new_end, self.days)
+        if self.owner:
+            self.owner += new_task
+        return new_task
 
 
 def main():
     house = Project('House tasks')
     house.add('Laundry')
     house.add('Dishes')
-    house.add(RecurrentTask('clean the house', datetime.now()))
-    house.add(house.search('clean the house').getting_done())
+    house += RecurrentTask('clean the house', datetime.now(), 7)
+    house.search('clean the house').getting_done()
     print(house)
 
     house.search('Dishes').getting_done()
