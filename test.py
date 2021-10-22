@@ -1,6 +1,10 @@
 from datetime import datetime, timedelta
 
 
+class TaskNotFound(Exception):
+    pass
+
+
 class Project:
     def __init__(self, name):
         self.name = name
@@ -38,8 +42,10 @@ class Project:
 
 
     def search(self, description):
-        #IndexError
-        return [element for element in self.task_list if element.description == description][0]
+        try:
+            return [element for element in self.task_list if element.description == description][0]
+        except IndexError as error:
+            raise TaskNotFound(str(error))
     
 
     def __str__(self):
@@ -101,6 +107,11 @@ def main():
     house += RecurrentTask('clean the house', datetime.now(), 7)
     house.search('clean the house').getting_done()
     print(house)
+
+    try:
+        house.search('Dishes - error').getting_done()
+    except TaskNotFound as error:
+        print(f'the cause was {str(error)}!')
 
     house.search('Dishes').getting_done()
     for tar in house:
