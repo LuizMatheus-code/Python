@@ -38,3 +38,4 @@ for counting in range(0, len(total_people)):
 print(f'''you registered {len(total_people)} people at total''')
 print(f'''heaviest {biggest}: {heaviest_people.sort()}''')
 print(f'''lightest {lowest}: {lightest_people.sort()}''')
+#ok
