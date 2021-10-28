@@ -44,14 +44,13 @@ def calculate_weight():
 
 
 def new():
-    test = [i for i in range(100)]
-    six = [x for x in test if '6' in str(x)]
-    print(test)
-    print(six)
-    space_count = [letter for letter in 'Find all of the numbers from 1–1000 that have a 6 in them' if letter.isspace]
-    print(len(space_count))
-    remove_vowels = ''.join([item for item in 'Count the number of spaces in a string (use string above)' if item.lower() not in 'aeiou'])
-    print(remove_vowels)
+    generator = (i ** 2 for i in range(10) if i % 2 == 0)
+    print(next(generator))
+    print(next(generator))
+
+    dic = {f'number {i}': i * 2 for i in range(5) if i % 2 == 0}
+    for name, num in dic.items():
+        print(f'{name}: {num}')
 
 
 new()

@@ -1,3 +1,5 @@
+from random import randint
+
 def area(base, height):
     area = base * height
     return area
@@ -77,11 +79,12 @@ def grades(*grade, average_situation=False):
     return result
 
 
-print(area(base=2, height=5))
-decoration('coding')
-print(biggest(10, 2,3 , 5, 6, 11))
-x = factorial(5, 3, 2, 4, 6)
-print(x)
-y = grades(1, 2, 3, 22, average_situation=True)
-print(y)
-help(grades)
+for number in range(1, 7):
+    dice = randint(1, 6)
+    if number % 2 != 0:
+        continue
+    if number % 2 == 0 and number == dice:
+        print('right')
+        break
+    else:
+        print('wrong')
