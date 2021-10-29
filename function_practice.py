@@ -1,5 +1,3 @@
-from random import randint
-
 def area(base, height):
     area = base * height
     return area
@@ -79,12 +77,30 @@ def grades(*grade, average_situation=False):
     return result
 
 
-for number in range(1, 7):
-    dice = randint(1, 6)
-    if number % 2 != 0:
-        continue
-    if number % 2 == 0 and number == dice:
-        print('right')
-        break
-    else:
-        print('wrong')
+def sequence(number):
+    try:
+        number = int(number)
+        if number > 0:
+            while number >= 0:
+                print(number, end=' ')
+                number -= 1
+        elif number == 0:
+            print(number)
+        else:
+            while number <= 0:
+                print(number, end=' ')
+                number += 1
+    except :
+        print('Error. Type a valid number')
+
+
+def reverse(num):
+    try:
+        num = int(num)
+        num = str(num)
+        print(f'{num} -> ', end='')
+        for digits in range((len(num) - 1), -1, -1):
+            print(num[digits], end='')
+    except:
+        print('invalid')
+
