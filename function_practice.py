@@ -104,3 +104,35 @@ def reverse(num):
     except:
         print('invalid')
 
+
+def day_operation(day):
+    try:
+        day = int(day)
+        def get_week_day(day):
+            days_of_the_week = {
+                1: "Sunday",
+                2: 'Monday',
+                3: 'Tuesday',
+                4: 'Wednesday',
+                5: 'Thursday',
+                6: 'Friday',
+                7: 'Saturday'
+            }
+            return days_of_the_week.get(day, 'Invalid')
+
+
+        def day_search(day_to_find):
+            weekend = [1, 7]
+            during_the_week = [2, 3, 4, 5, 6]
+            if day_to_find in weekend:
+                return 'Weekend'
+            elif day_to_find in during_the_week:
+                return 'Day of the week'
+            else:
+                return 'Invalid'
+        
+        return f'{day}: {get_week_day(day)} ({day_search(day)})'
+    except:
+        return 'Invalid'
+
+
