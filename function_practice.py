@@ -136,3 +136,8 @@ def day_operation(day):
         return 'Invalid'
 
 
+def Fibo(quantity, sequence=(0, 1)):
+    return sequence if len(sequence) == quantity else \
+        Fibo(quantity, sequence + (sum(sequence[-2:]), ))
+
+
