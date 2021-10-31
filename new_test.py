@@ -1,15 +1,11 @@
-import csv
-from urllib import request
-
-
-def read(url):
-    with request.urlopen(url) as filein:
-        print('download due')
-        data = filein.read().decode('latin1')
-        print('download done')
-        for city in csv.reader(data.splitlines()):
-            print(f'{city[8]}: {city[3]}')
+def tag_block(text, clas='success', inline=False):
+    tag = 'span' if inline else 'div'
+    return f'<{tag} class"{clas}">{text}</{tag}>'
 
 
 if __name__ == '__main__':
-    read(r'http://files.cod3r.com.br/curso-python/desafio-ibge.csv')
+    print(tag_block('block'))
+    print(tag_block('inline and class', 'info', True))
+    print(tag_block('inline', inline=True))
+    print(tag_block(inline=True, text='inline'))
+    print(tag_block('failure', clas='error'))
