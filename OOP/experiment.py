@@ -75,3 +75,30 @@ class Product:
         if isinstance(value, str):
             value = float(value.replace("R$", ''))
         self._price = value
+    
+
+class DataBase:
+    '''a class representing a data base'''
+    def __init__(self):
+        self.__data = {}
+
+    def insert_client(self, id, name):
+        if 'clients' not in self.__data:
+            self.__data['clients'] = {id: name}
+        else:
+            self.__data['clients'].update({id: name})
+    
+    
+    def client_list(self):
+        for id, name in self.__data['clients'].items():
+            print(id, name)
+
+
+    def erase_client(self, id):
+        del self.__data['clients'][id]
+
+
+base = DataBase()
+base.__data = 'another thing'
+print(base.__data)
+base.client_list()
