@@ -44,6 +44,19 @@ class Character:
         finally:
             return winner
 
+    @staticmethod
+    def sans_gaster_blaster(charac):
+        try:
+            character_name = charac.name.capitalize()
+            character_attack = charac.attack
+            if character_name == "Sans":
+                character_attack *= 10
+                return character_attack
+            else:
+                return NameError
+        except Exception as error:
+            return error
+
 
 class Human(Character):
     def __init__(self, name, life, attack, defense):
@@ -71,6 +84,9 @@ class Monster(Character):
 
 if __name__ == '__main__':
     sans = Monster('sans', 10, 5, 1)
+    sans.sans_gaster_blaster(sans)
+    gaster_blaster01 = Character.sans_gaster_blaster(sans)
+    print(gaster_blaster01)
+    print(sans.attack)
     frisk = Human('Frisk', 20, 5, 1)
 
-    print(frisk.fight(sans))
