@@ -7,7 +7,16 @@ class Character:
         self.life = life
         self.attack = attack
         self.defense = defense
-    
+
+
+    @classmethod
+    def more_life(cls, life):
+        try:
+            life += 10
+            return life
+        except Exception as fail:
+            print(fail)
+
 
     def fight(self, opponent):
         winner = None
@@ -86,7 +95,6 @@ if __name__ == '__main__':
     sans = Monster('sans', 10, 5, 1)
     sans.sans_gaster_blaster(sans)
     gaster_blaster01 = Character.sans_gaster_blaster(sans)
-    print(gaster_blaster01)
-    print(sans.attack)
-    frisk = Human('Frisk', 20, 5, 1)
-
+    print(sans.life)
+    sans.life = sans.more_life(sans.life)
+    print(sans.life)
