@@ -1,5 +1,5 @@
-from experiment import Product
-from experiment import Person
+from collection import Product
+from collection import Person
 
 if __name__ == "__main__":
     finn = Person('Finn, the human', 17)
