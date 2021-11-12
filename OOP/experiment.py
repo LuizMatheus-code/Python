@@ -61,13 +61,82 @@ class HomoSapiens(Human):
         return True
 
 
-if __name__ == '__main__':
-    """try:
-        jose = Human('Jhon')
-        print(jose.inteligence)
-    except TypeError as error:
-        print(error)"""
+class Animal:
+    @property
+    def abilities(self):
+        return ('sleep', 'eat', 'drink')
 
-    k = Neanderthal('kable')
-    print('{} of the class {}, inteligence {}'
-        .format(k.name, k.__class__.__name__, k.inteligence))
+
+class Human_being(Animal):
+    @property
+    def abilities(self):
+        return super().abilities + ('think', 'speak', 'study')
+
+
+class Spider(Animal):
+    @property
+    def abilities(self):
+        return super().abilities + ('climb', 'bite')
+
+
+class SpiderMan(Human_being, Spider):
+    @property
+    def abilities(self):
+        return super().abilities + \
+            ('reflexes', 'super strength')
+
+class CrystalGems:
+    def __str__(self):
+        formating = super().__str__().replace('(', '{[').replace(')', ']}')
+        return f"<>{formating}<>"
+
+
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+    
+    def __str__(self):
+        return self.name
+
+    
+class Creature:
+    def __init__(self, name, animal=True):
+        self.name = name
+        self.animal = animal
+    
+    def __str__(self):
+        return self.name + ' (animal)' if self.animal else ''
+
+
+class CrystalPerson(CrystalGems, Person):
+    pass
+
+
+class CrystalCreature(CrystalGems, Creature):
+    pass
+
+
+class RGB:
+    def __init__(self):
+        self.colors = ['red', 'green', 'blue'][::-1]
+
+
+    def __iter__(self):
+        return self
+
+
+    def __next__(self):
+        try:
+            return self.colors.pop()
+        except IndexError:
+            raise StopIteration()
+
+
+class SimpleClass:
+    pass
+
+
+if __name__ == '__main__':
+    lis = [SimpleClass, SimpleClass, SimpleClass]
+    print(lis.count(SimpleClass))

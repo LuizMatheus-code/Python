@@ -92,9 +92,4 @@ class Monster(Character):
 
 
 if __name__ == '__main__':
-    sans = Monster('sans', 10, 5, 1)
-    sans.sans_gaster_blaster(sans)
-    gaster_blaster01 = Character.sans_gaster_blaster(sans)
-    print(sans.life)
-    sans.life = sans.more_life(sans.life)
-    print(sans.life)
+    chara = Character('Chara', True, None, 999)
