@@ -1,6 +1,4 @@
-def factor(n):
-    return n * (factor(n -1) if (n - 1) > 1 else 1)
+from calendar import month_name, mdays
 
-
-if __name__ == '__main__':
-    print(factor(5))
+for count in range(1, 13):
+    print(f'{month_name[count]} {mdays[count]}')
