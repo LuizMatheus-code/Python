@@ -1,4 +1,6 @@
-from calendar import month_name, mdays
+def mapping(func, lis):
+    return (func(element) for element in lis)
 
-for count in range(1, 13):
-    print(f'{month_name[count]} {mdays[count]}')
+
+xy = mapping(lambda x: x ** 2, [2, 3, 4])
+print(list(xy))
